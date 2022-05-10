@@ -17,7 +17,7 @@ class CarsDatasourceImpl implements CarsDatasource {
       );
 
       if (result.statusCode == 200) {
-        final responseData = result.data as List;
+        final responseData = (result.data['result'] ?? []) as List;
 
         final cars = responseData
             .map((car) => CarsEntityMapper.fromMap(map: car))

@@ -40,7 +40,7 @@ dependencies:
   flutter_bloc: ^8.0.1
   bloc_test: ^9.0.3
   octo_image: ^1.0.1
-  network_image_mock: ^2.1.0
+  mocktail_image_network: ^0.3.1
 
 dev_dependencies:
   flutter_test:

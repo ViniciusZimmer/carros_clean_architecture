@@ -1,16 +1,23 @@
 class CarsEntity {
-  final int id;
-  final String? name;
-  final String? type;
-  final String? description;
-  final String? photoUrl;
+  int id;
+  String? nome;
+  String? tipo;
+  String? descricao;
+  String? urlFoto;
+  String? urlVideo;
+  String? latitude;
+  String? longitude;
 
-  CarsEntity(
-      {required this.id,
-      required this.name,
-      required this.description,
-      required this.type,
-      required this.photoUrl});
+  CarsEntity({
+    required this.id,
+    this.nome,
+    this.tipo,
+    this.descricao,
+    this.urlFoto,
+    this.urlVideo,
+    this.latitude,
+    this.longitude,
+  });
 
   @override
   bool operator ==(Object other) {
@@ -18,18 +25,24 @@ class CarsEntity {
 
     return other is CarsEntity &&
         other.id == id &&
-        other.name == name &&
-        other.description == description &&
-        other.type == type &&
-        other.photoUrl == photoUrl;
+        other.nome == nome &&
+        other.tipo == tipo &&
+        other.descricao == descricao &&
+        other.urlFoto == urlFoto &&
+        other.urlVideo == urlVideo &&
+        other.latitude == latitude &&
+        other.longitude == longitude;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-        name.hashCode ^
-        description.hashCode ^
-        type.hashCode ^
-        photoUrl.hashCode;
+        nome.hashCode ^
+        tipo.hashCode ^
+        descricao.hashCode ^
+        urlFoto.hashCode ^
+        urlVideo.hashCode ^
+        latitude.hashCode ^
+        longitude.hashCode;
   }
 }

@@ -22,11 +22,17 @@ void main() {
     //Arrange
     final response = <CarsEntity>[
       CarsEntity(
-          id: 1,
-          name: 'Fiat',
-          description: 'teste',
-          type: 'teste',
-          photoUrl: 'teste'),
+        id: 13301,
+        nome: "Ford Mustang 1976 BBB",
+        tipo: "classicos",
+        descricao: "Desc Ford Mustang 1976fwsafdfasd",
+        urlFoto:
+            "https://s3-sa-east-1.amazonaws.com/videos.livetouchdev.com.br/classicos/Ford_Mustang.png",
+        urlVideo:
+            "https://s3-sa-east-1.amazonaws.com/videos.livetouchdev.com.br/classicos/ford_mustang.mp4",
+        latitude: "-23.564224",
+        longitude: "-46.653156",
+      ),
     ];
 
     when(() => carsRepositoryMock.getCars()).thenAnswer(

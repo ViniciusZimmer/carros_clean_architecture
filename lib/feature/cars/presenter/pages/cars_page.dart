@@ -86,7 +86,7 @@ class _CarsTile extends StatelessWidget {
                     children: [
                       Flexible(
                         child: Text(
-                          car.name ?? '',
+                          car.nome ?? '',
                           style: const TextStyle(
                             fontSize: 10,
                             color: Colors.black,
@@ -105,28 +105,6 @@ class _CarsTile extends StatelessWidget {
                       ),
                     ],
                   ),
-                  // Row(
-                  //   crossAxisAlignment: CrossAxisAlignment.center,
-                  //   children: [
-                  // Column(
-                  //   crossAxisAlignment: CrossAxisAlignment.start,
-                  //   children: pokemon.type
-                  //       .map((e) => PokemonType(
-                  //             name: e,
-                  //           ))
-                  //       .toList(),
-                  // ),
-                  // Flexible(
-                  //   child: Container(
-                  //     height: 100,
-                  //     width: 100,
-                  // child: Flexible(
-                  //   child: ,
-                  // ),
-                  //   ),
-                  // ),
-                  //   ],
-                  // ),
                 ],
               ),
             ),
@@ -137,7 +115,7 @@ class _CarsTile extends StatelessWidget {
               height: 100,
               width: 100,
               child: ImageView(
-                imageProvider: NetworkImage(car.photoUrl ?? ''),
+                imageProvider: NetworkImage(car.urlFoto ?? ''),
               ))
         ],
       ),

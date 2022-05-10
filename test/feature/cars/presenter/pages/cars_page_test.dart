@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:mocktail_image_network/mocktail_image_network.dart';
 
 class GetCarsUsecaseMock extends Mock implements GetCarsUsecase {}
 
@@ -33,11 +34,16 @@ void main() {
     when(() => getCarsUsecaseMock.call()).thenAnswer(
       (_) async => [
         CarsEntity(
-          id: 1,
-          description: 'test',
-          photoUrl: 'https://image.tmdb.org/t/p/w300/teste',
-          type: 'teste',
-          name: 'fiat',
+          id: 13301,
+          nome: "Ford Mustang 1976 BBB",
+          tipo: "classicos",
+          descricao: "Desc Ford Mustang 1976fwsafdfasd",
+          urlFoto:
+              "https://s3-sa-east-1.amazonaws.com/videos.livetouchdev.com.br/classicos/Ford_Mustang.png",
+          urlVideo:
+              "https://s3-sa-east-1.amazonaws.com/videos.livetouchdev.com.br/classicos/ford_mustang.mp4",
+          latitude: "-23.564224",
+          longitude: "-46.653156",
         ),
       ],
     );
@@ -62,38 +68,43 @@ void main() {
         await Future.delayed(const Duration(seconds: 1));
         return [
           CarsEntity(
-            id: 1,
-            description: 'test',
-            photoUrl: 'https://image.tmdb.org/t/p/w300/teste',
-            type: 'teste',
-            name: 'fiat',
+            id: 13301,
+            nome: "Ford Mustang 1976 BBB",
+            tipo: "classicos",
+            descricao: "Desc Ford Mustang 1976fwsafdfasd",
+            urlFoto:
+                "https://s3-sa-east-1.amazonaws.com/videos.livetouchdev.com.br/classicos/Ford_Mustang.png",
+            urlVideo:
+                "https://s3-sa-east-1.amazonaws.com/videos.livetouchdev.com.br/classicos/ford_mustang.mp4",
+            latitude: "-23.564224",
+            longitude: "-46.653156",
           ),
         ];
       },
     );
 
-    //Mockar testes que tentam carregar imagens da web
-    // await mockNetworkImages(() async {
-    //   await tester.pumpWidget(createWidgetTest());
+    // Mockar testes que tentam carregar imagens da web
+    await mockNetworkImages(() async {
+      await tester.pumpWidget(createWidgetTest());
 
-    //   //Encontrar o CircularProgressIndicator
-    //   final circularProgressIndicator = find.byKey(
-    //     const Key('circular-progress-indicator'),
-    //   );
+      //Encontrar o CircularProgressIndicator
+      final circularProgressIndicator = find.byKey(
+        const Key('circular-progress-indicator'),
+      );
 
-    //   expect(circularProgressIndicator, findsOneWidget);
+      expect(circularProgressIndicator, findsOneWidget);
 
-    //   //Aguardando termino da animação do CircularProgressIndicator
-    //   await tester.pumpAndSettle();
+      //Aguardando termino da animação do CircularProgressIndicator
+      await tester.pumpAndSettle();
 
-    //   //Encontrar a Lista de cars
-    //   final cars = find.byKey(const Key('cars-list'));
+      //Encontrar a Lista de cars
+      final cars = find.byKey(const Key('cars-list'));
 
-    //   expect(cars, findsOneWidget);
+      expect(cars, findsOneWidget);
 
-    //   verify(() => getCarsUsecaseMock.call()).called(1);
-    //   verifyNoMoreInteractions(getCarsUsecaseMock);
-    // });
+      verify(() => getCarsUsecaseMock.call()).called(1);
+      verifyNoMoreInteractions(getCarsUsecaseMock);
+    });
   });
 
   testWidgets('''
