@@ -1,6 +1,6 @@
 {
-    "name": "clean_pokedex",
-    "short_name": "clean_pokedex",
+    "name": "clean_cars",
+    "short_name": "clean_cars",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

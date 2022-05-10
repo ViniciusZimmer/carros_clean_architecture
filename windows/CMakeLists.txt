@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(clean_pokedex LANGUAGES CXX)
+project(clean_cars LANGUAGES CXX)
 
-set(BINARY_NAME "clean_pokedex")
+set(BINARY_NAME "clean_cars")
 
 cmake_policy(SET CMP0063 NEW)
 

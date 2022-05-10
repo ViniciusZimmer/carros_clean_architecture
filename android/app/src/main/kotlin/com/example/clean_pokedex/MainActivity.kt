@@ -1,4 +1,4 @@
-package com.example.clean_pokedex
+package com.example.clean_cars
 
 import io.flutter.embedding.android.FlutterActivity
 
