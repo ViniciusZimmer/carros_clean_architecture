@@ -70,23 +70,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             BlocConsumer<LoginCubit, LoginState>(
               listener: (context, state) {
-                if (state is LoginSuccessState) {
-                  showDialog(
-                    context: context,
-                    builder: (_) => _SuccessDialogWidget(
-                      email: state.user.email,
-                    ),
-                  );
-                }
-                if (state is LoginErrorState) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        state.errorMessage,
-                      ),
-                    ),
-                  );
-                }
+                _listener(state, context);
               },
               builder: (context, state) {
                 final bool isLoadingState = state is LoginLoadingState;
@@ -94,12 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                   key: const Key('button-login'),
                   text: 'Login',
                   onPressed: () {
-                    final request = LoginRequestEntity(
-                      login: _loginController.text,
-                      password: _passwordController.text,
-                    );
-
-                    context.read<LoginCubit>().doLogin(request);
+                    _onPressedLogin(context);
                   },
                   showProgress: isLoadingState,
                 );
@@ -110,37 +89,34 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-}
 
-class _SuccessDialogWidget extends StatelessWidget {
-  final String email;
-  const _SuccessDialogWidget({
-    Key? key,
-    required this.email,
-  }) : super(key: key);
+  void _onPressedLogin(BuildContext context) {
+    final request = LoginRequestEntity(
+      login: _loginController.text,
+      password: _passwordController.text,
+    );
 
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text('Email: $email'),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => BlocProvider(
-                    create: (context) => getIt<CarsCubit>()..getCars(),
-                    child: const CarsPage(),
-                  ),
-                ),
-              );
-            },
-            child: const Text('Ir para carros'),
-          ),
-        ],
+    context.read<LoginCubit>().doLogin(request);
+
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => BlocProvider(
+          create: (context) => getIt<CarsCubit>()..getCars(),
+          child: const CarsPage(),
+        ),
       ),
     );
+  }
+
+  void _listener(LoginState state, BuildContext context) {
+    if (state is LoginErrorState) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            state.errorMessage,
+          ),
+        ),
+      );
+    }
   }
 }
