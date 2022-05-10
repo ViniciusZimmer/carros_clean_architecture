@@ -24,3 +24,9 @@ O aplicativo possui testes nas seguintes camadas:
  - UseCase / Domain
  - Repository
  - DataSource
+
+# Teste 
+
+Flutter test
+
+<img width="514" alt="Captura de Tela 2022-05-10 às 16 43 42" src="https://user-images.githubusercontent.com/73594036/167709550-ac58b779-cf07-4a56-a7c0-4b065ca1c2bd.png">
