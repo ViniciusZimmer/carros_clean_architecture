@@ -1,16 +1,26 @@
-# clean_cars
+# Carros
 
-A new Flutter project.
+Flutter - App utilizando Clean Architecture
 
-## Getting Started
+# Arquitetura
 
-This project is a starting point for a Flutter application.
+Proposta de Arquitetura Limpa para o Dart/Flutter: (https://github.com/Flutterando/Clean-Dart)
+<img width="891" alt="Captura de Tela 2022-05-10 às 16 23 24" src="https://user-images.githubusercontent.com/73594036/167706355-c55694dd-6804-48a7-9da3-36816fedeaee.png">
+<img width="831" alt="Captura de Tela 2022-05-10 às 16 23 38" src="https://user-images.githubusercontent.com/73594036/167706330-c104cb79-5dd8-4a3a-92c1-d393768dce12.png">
 
-A few resources to get you started if this is your first Flutter project:
+Arquitetura de pastas usadas no projeto:
+(Feature de Carros)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img width="262" alt="Captura de Tela 2022-05-10 às 16 26 16" src="https://user-images.githubusercontent.com/73594036/167706714-e4231c07-c332-4a91-ad48-0f009c875697.png">
+
+
+# Testes (Unit / Widget)
+
+O aplicativo possui testes nas seguintes camadas:
+
+ - Testes de Widget
+ - Presenter (Cubit)
+ - UseCase / Domain
+ - Repository
+ - DataSource
