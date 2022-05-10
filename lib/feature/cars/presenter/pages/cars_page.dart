@@ -28,13 +28,16 @@ class _CarsPageState extends State<CarsPage> {
               child: CircularProgressIndicator(),
             );
           } else if (state is CarsLoadedState) {
-            return ListView.builder(
+            return GridView.builder(
               key: const Key('cars-list'),
               itemCount: state.cars.length,
               itemBuilder: (_, index) {
                 final car = state.cars[index];
                 return _CarsTile(car: car);
               },
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+              ),
             );
           } else if (state is CarsErrorState) {
             return Center(
@@ -59,13 +62,84 @@ class _CarsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(car.name ?? ''),
-      subtitle: Text(car.description ?? ''),
-      leading: SizedBox(
-        height: 100,
-        width: 50,
-        child: ImageView(imageProvider: NetworkImage(car.photoUrl ?? '')),
+    return GestureDetector(
+      onTap: () {},
+      child: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white10,
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(
+                color: Colors.black.withOpacity(0.4),
+                width: 0.5,
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          car.name ?? '',
+                          style: const TextStyle(
+                            fontSize: 10,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontStyle: FontStyle.italic,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        car.id.toString(),
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: Colors.black.withOpacity(0.4),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  // Row(
+                  //   crossAxisAlignment: CrossAxisAlignment.center,
+                  //   children: [
+                  // Column(
+                  //   crossAxisAlignment: CrossAxisAlignment.start,
+                  //   children: pokemon.type
+                  //       .map((e) => PokemonType(
+                  //             name: e,
+                  //           ))
+                  //       .toList(),
+                  // ),
+                  // Flexible(
+                  //   child: Container(
+                  //     height: 100,
+                  //     width: 100,
+                  // child: Flexible(
+                  //   child: ,
+                  // ),
+                  //   ),
+                  // ),
+                  //   ],
+                  // ),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+              bottom: 12,
+              right: 4,
+              height: 100,
+              width: 100,
+              child: ImageView(
+                imageProvider: NetworkImage(car.photoUrl ?? ''),
+              ))
+        ],
       ),
     );
   }
