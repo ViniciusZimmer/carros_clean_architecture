@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
         padding: const EdgeInsets.all(16),
         decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('assets/images/bg_login.jpg'),
+                image: AssetImage('assets/images/bg_login.jpeg'),
                 fit: BoxFit.cover)),
         child: ListView(
           children: [
@@ -39,18 +39,31 @@ class _LoginPageState extends State<LoginPage> {
               height: 16,
             ),
             TextField(
+              style: const TextStyle(color: Colors.black),
               key: const Key('textfield-login'),
               controller: _loginController,
-              decoration: const InputDecoration(label: Text('Login')),
+              decoration: const InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
+                label: Text('Login'),
+                labelStyle: TextStyle(color: Colors.black),
+              ),
             ),
             const SizedBox(
               height: 16,
             ),
             TextField(
+              style: const TextStyle(color: Colors.black),
               key: const Key('textfield-password'),
               controller: _passwordController,
               obscureText: true,
-              decoration: const InputDecoration(label: Text('Password')),
+              decoration: const InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  label: Text('Password'),
+                  labelStyle: TextStyle(
+                    color: Colors.black,
+                  )),
             ),
             const SizedBox(
               height: 32,
@@ -124,7 +137,7 @@ class _SuccessDialogWidget extends StatelessWidget {
                 ),
               );
             },
-            child: const Text('Ir para movies'),
+            child: const Text('Ir para carros'),
           ),
         ],
       ),

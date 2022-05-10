@@ -14,7 +14,7 @@ class AppButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const backgroundColor1 = Colors.orange;
+    const backgroundColor1 = Colors.red;
     const backgroundColor2 = Colors.red;
     const textColor = Colors.white;
 
