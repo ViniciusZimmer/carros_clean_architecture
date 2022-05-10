@@ -44,7 +44,7 @@ void main() {
 
     await tester.pumpWidget(createWidgetTest());
 
-    final carsAppBar = find.byKey(const Key('carslist-app-bar'));
+    final carsAppBar = find.byKey(const Key('carlist-app-bar'));
 
     expect(carsAppBar, findsOneWidget);
 

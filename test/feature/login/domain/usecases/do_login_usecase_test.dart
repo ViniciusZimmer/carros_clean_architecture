@@ -28,15 +28,15 @@ void main() {
       () async {
     //Arrange
     final LoginRequestEntity request = LoginRequestEntity(
-      login: 'vinicius@gmail.com',
+      login: 'wendell@gmail.com',
       password: 'passoncn',
     );
 
     final UserInfoEntity response = UserInfoEntity(
       id: 42,
-      name: 'vinicius',
+      name: 'wendell',
       photoUrl: 'dbkfdb',
-      email: 'vinicius@gmail.com',
+      email: 'whatebr@com',
     );
 
     when(

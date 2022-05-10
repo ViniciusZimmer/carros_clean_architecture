@@ -1,13 +1,13 @@
-import '../../../cars/presenter/cubits/cars_cubit.dart';
-import '../../../cars/presenter/pages/cars_page.dart';
-import '../../domain/entities/login_request_entity.dart';
-import '../cubits/login_cubit.dart';
-import '../cubits/login_state.dart';
-import '../widgets/button.dart';
+import 'package:clean_cars/feature/login/domain/entities/login_request_entity.dart';
+import 'package:clean_cars/feature/login/presenter/cubits/login_cubit.dart';
+import 'package:clean_cars/feature/login/presenter/cubits/login_state.dart';
+import 'package:clean_cars/feature/login/presenter/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/service_locator/service_locator.dart';
+import '../../../cars/presenter/cubits/cars_cubit.dart';
+import '../../../cars/presenter/pages/cars_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -25,20 +25,15 @@ class _LoginPageState extends State<LoginPage> {
       body: Container(
         padding: const EdgeInsets.all(16),
         decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/images/bg_login.jpg'),
-              fit: BoxFit.cover),
-        ),
+            image: DecorationImage(
+                image: AssetImage('assets/images/bg_login.jpg'),
+                fit: BoxFit.cover)),
         child: ListView(
           children: [
             Container(
               padding: const EdgeInsets.all(32),
-              child: Image.asset(
-                'assets/images/logo_nf.png',
-                key: const Key('nf-logo-image'),
-                width: 120,
-                height: 120,
-              ),
+              child: Image.asset('assets/images/logo_nf.png',
+                  key: const Key('nf-logo-image'), width: 120, height: 120),
             ),
             const SizedBox(
               height: 16,
@@ -46,9 +41,7 @@ class _LoginPageState extends State<LoginPage> {
             TextField(
               key: const Key('textfield-login'),
               controller: _loginController,
-              decoration: const InputDecoration(
-                label: Text('Login'),
-              ),
+              decoration: const InputDecoration(label: Text('Login')),
             ),
             const SizedBox(
               height: 16,
@@ -57,16 +50,30 @@ class _LoginPageState extends State<LoginPage> {
               key: const Key('textfield-password'),
               controller: _passwordController,
               obscureText: true,
-              decoration: const InputDecoration(
-                label: Text('Password'),
-              ),
+              decoration: const InputDecoration(label: Text('Password')),
             ),
             const SizedBox(
               height: 32,
             ),
             BlocConsumer<LoginCubit, LoginState>(
               listener: (context, state) {
-                _listener(state, context);
+                if (state is LoginSuccessState) {
+                  showDialog(
+                    context: context,
+                    builder: (_) => _SuccessDialogWidget(
+                      email: state.user.email,
+                    ),
+                  );
+                }
+                if (state is LoginErrorState) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        state.errorMessage,
+                      ),
+                    ),
+                  );
+                }
               },
               builder: (context, state) {
                 final bool isLoadingState = state is LoginLoadingState;
@@ -74,7 +81,12 @@ class _LoginPageState extends State<LoginPage> {
                   key: const Key('button-login'),
                   text: 'Login',
                   onPressed: () {
-                    _onPressedLogin(context);
+                    final request = LoginRequestEntity(
+                      login: _loginController.text,
+                      password: _passwordController.text,
+                    );
+
+                    context.read<LoginCubit>().doLogin(request);
                   },
                   showProgress: isLoadingState,
                 );
@@ -85,34 +97,37 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+}
 
-  void _onPressedLogin(BuildContext context) {
-    final request = LoginRequestEntity(
-      login: _loginController.text,
-      password: _passwordController.text,
-    );
+class _SuccessDialogWidget extends StatelessWidget {
+  final String email;
+  const _SuccessDialogWidget({
+    Key? key,
+    required this.email,
+  }) : super(key: key);
 
-    context.read<LoginCubit>().doLogin(request);
-
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (_) => BlocProvider(
-          create: (context) => getIt<CarsCubit>()..getCars(),
-          child: const CarsPage(),
-        ),
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text('Email: $email'),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => BlocProvider(
+                    create: (context) => getIt<CarsCubit>()..getCars(),
+                    child: const CarsPage(),
+                  ),
+                ),
+              );
+            },
+            child: const Text('Ir para movies'),
+          ),
+        ],
       ),
     );
-  }
-
-  void _listener(LoginState state, BuildContext context) {
-    if (state is LoginErrorState) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            state.errorMessage,
-          ),
-        ),
-      );
-    }
   }
 }
