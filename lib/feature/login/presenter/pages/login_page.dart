@@ -70,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             BlocConsumer<LoginCubit, LoginState>(
               listener: (context, state) {
-                _listener(state, context);
+                // _listener(state, context);
               },
               builder: (context, state) {
                 final bool isLoadingState = state is LoginLoadingState;
@@ -108,15 +108,15 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void _listener(LoginState state, BuildContext context) {
-    if (state is LoginErrorState) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            state.errorMessage,
-          ),
-        ),
-      );
-    }
-  }
+  // void _listener(LoginState state, BuildContext context) {
+  //   if (state is LoginErrorState) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(
+  //         content: Text(
+  //           state.errorMessage,
+  //         ),
+  //       ),
+  //     );
+  //   }
+  // }
 }
