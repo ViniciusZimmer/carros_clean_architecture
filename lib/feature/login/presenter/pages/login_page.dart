@@ -107,16 +107,4 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-
-  // void _listener(LoginState state, BuildContext context) {
-  //   if (state is LoginErrorState) {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(
-  //         content: Text(
-  //           state.errorMessage,
-  //         ),
-  //       ),
-  //     );
-  //   }
-  // }
 }
